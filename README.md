@@ -8,7 +8,7 @@ It presents my skills, projects, certifications, coding profiles and resume, and
 
 Add your deployed website link here:
 
-https://your-project-name.netlify.app
+https://cosmic-sawine-487be8.netlify.app/
 
 ## 📌 Features
 
