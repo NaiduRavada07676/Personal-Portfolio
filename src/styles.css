@@ -1,0 +1,178 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* Light */
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.16 0 0);
+  --card: oklch(1 0 0 / 80%);
+  --card-foreground: oklch(0.16 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0 0);
+  --primary: oklch(0.54 0.23 27);
+  --primary-2: oklch(0.62 0.2 38);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.22 0 0);
+  --muted: oklch(0.955 0 0);
+  --muted-foreground: oklch(0.42 0 0);
+  --accent: oklch(0.95 0.03 27);
+  --accent-foreground: oklch(0.4 0.17 27);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0 0 0 / 11%);
+  --input: oklch(0 0 0 / 16%);
+  --ring: oklch(0.54 0.23 27);
+  --grid-line: oklch(0 0 0 / 5%);
+  --glow: oklch(0.6 0.22 27 / 16%);
+  --btn-from: oklch(0.57 0.24 27);
+  --btn-to: oklch(0.46 0.2 25);
+}
+
+/* Dark (default) - Netflix style */
+.dark {
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.19 0 0 / 70%);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.17 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.65 0.24 27);
+  --primary-2: oklch(0.74 0.18 45);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.94 0 0);
+  --muted: oklch(0.21 0 0);
+  --muted-foreground: oklch(0.72 0 0);
+  --accent: oklch(0.3 0.1 27 / 55%);
+  --accent-foreground: oklch(0.85 0.1 27);
+  --destructive: oklch(0.7 0.19 22);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.65 0.24 27);
+  --grid-line: oklch(1 0 0 / 3.5%);
+  --glow: oklch(0.6 0.24 27 / 22%);
+  --btn-from: oklch(0.58 0.24 27);
+  --btn-to: oklch(0.47 0.21 25);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  section[id] { scroll-margin-top: 5rem; }
+  ::selection { background: var(--primary); color: var(--primary-foreground); }
+}
+
+@utility tech-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+@utility glow-orb {
+  background: radial-gradient(circle, var(--glow), transparent 65%), radial-gradient(circle at 70% 30%, color-mix(in oklab, var(--primary-2) 12%, transparent), transparent 60%);
+}
+
+@utility glass {
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+}
+
+@utility card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: scale(1.03);
+    border-color: color-mix(in oklab, var(--primary) 60%, transparent);
+    box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.8), 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent);
+    z-index: 5;
+  }
+}
+
+@utility text-gradient {
+  background: linear-gradient(120deg, var(--primary) 0%, var(--primary-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  &.is-visible { opacity: 1; transform: none; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+@utility caret { animation: blink 1s step-end infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Netflix-style accents */
+button.bg-primary, a.bg-primary {
+  background-image: linear-gradient(180deg, var(--btn-from), var(--btn-to));
+  color: #fff;
+  border: 0;
+  font-weight: 600;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+button.bg-primary:hover, a.bg-primary:hover {
+  transform: scale(1.04);
+  filter: brightness(1.12);
+  box-shadow: 0 10px 28px -10px color-mix(in oklab, var(--btn-from) 80%, transparent);
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(70rem 26rem at 50% -12%, color-mix(in oklab, var(--btn-from) 22%, transparent), transparent 70%),
+    linear-gradient(to bottom, transparent 70%, color-mix(in oklab, var(--btn-from) 5%, transparent));
+}
+h1, h2 { font-weight: 800; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
